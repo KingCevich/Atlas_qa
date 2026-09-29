@@ -1,0 +1,90 @@
+name: "Preparación del entorno"
+description: "Paso 1 de la actividad 2.3.2: registrar hardware/software, datos de prueba y herramientas de soporte antes de ejecutar."
+title: "[ENTORNO] Preparación del entorno de pruebas"
+labels: ["tipo: entorno", "ciclo: 0-preparacion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Completa este issue **antes** del Smoke Test. Si el entorno no queda estable, no se ejecuta ningún caso (criterio de entrada del Plan de Pruebas, sección 3.1).
+
+  - type: input
+    id: equipo
+    attributes:
+      label: Equipo / integrante que prepara el entorno
+      placeholder: "Ej: Equipo 3 - Nicolas C."
+    validations:
+      required: true
+
+  - type: textarea
+    id: hw_sw
+    attributes:
+      label: "1. Hardware / Software"
+      description: "Sistema operativo, CPU, RAM, navegadores (versión exacta), Docker, Node.js y versión de PostgreSQL del contenedor de Atlas."
+      value: |
+        | Elemento | Versión / detalle |
+        |---|---|
+        | Sistema operativo | |
+        | Procesador / RAM | |
+        | Google Chrome | |
+        | Mozilla Firefox | |
+        | Microsoft Edge | |
+        | Safari | No disponible en Windows (ver observaciones) |
+        | Docker Engine / Compose | |
+        | Node.js | |
+        | PostgreSQL (contenedor Atlas) | |
+        | URL frontend / API | http://localhost:____ / http://localhost:____/api |
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: datos
+    attributes:
+      label: "2. Datos de prueba"
+      description: "¿Se cargaron los scripts de base de datos necesarios?"
+      options:
+        - label: "Contenedores de Atlas levantados (`docker compose ps` muestra frontend, backend y BD en estado running/healthy)"
+        - label: "Esquema de BD creado por los scripts de inicialización (tablas visibles en Adminer)"
+        - label: "Usuarios de prueba existen (user_test2, user_test3, user_test3.2, user_test3.3)"
+        - label: "Empresa de prueba creada (UserEnterprise)"
+        - label: "Clientes y contratos de prueba disponibles (Rodrigo Perez / Fernando Perez Soto, Acuerdo Legal 1-2-3)"
+        - label: "Archivos de prueba preparados (PDF válido, DOCX y XLSX inválidos)"
+        - label: "Respaldo (dump) de la BD tomado antes de ejecutar, para poder restaurar entre ciclos"
+
+  - type: checkboxes
+    id: herramientas
+    attributes:
+      label: "3. Herramientas de soporte"
+      description: "¿Están listos los capturadores de pantalla y herramientas de logs?"
+      options:
+        - label: "Capturador de pantalla listo (Recortes Win+Shift+S / ShareX) y carpeta `evidencias/` creada"
+        - label: "Logs del backend accesibles (`docker compose logs -f <servicio-backend>`)"
+        - label: "DevTools del navegador (pestañas Network y Console) revisadas"
+        - label: "Postman con la colección de Atlas importada y variable de entorno `baseUrl`"
+        - label: "OWASP ZAP instalado y configurado como proxy"
+        - label: "JMeter (o k6) instalado para CP-15"
+        - label: "Lighthouse disponible (DevTools de Chrome) para CP-15/CP-16"
+        - label: "Adminer accesible en http://localhost:8080 (solo lectura)"
+        - label: "SonarQube Community Build en http://localhost:9000 y primer análisis ejecutado"
+
+  - type: dropdown
+    id: veredicto
+    attributes:
+      label: "¿El entorno es estable y apto para iniciar el Ciclo 1 (Smoke Test)?"
+      options:
+        - "Sí - entorno apto"
+        - "No - existen bloqueos (detallar abajo)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: observaciones
+    attributes:
+      label: Observaciones / bloqueos / limitaciones
+      placeholder: "Ej: Safari no disponible en Windows; se usará WebKit vía Playwright como aproximación para CP-16."
+
+  - type: textarea
+    id: evidencia
+    attributes:
+      label: Evidencia
+      description: "Arrastra aquí capturas de: docker compose ps, versión del navegador (chrome://version), Adminer con tablas, SonarQube funcionando."
