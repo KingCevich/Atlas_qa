@@ -1,0 +1,86 @@
+name: "Reporte de defecto (BUG)"
+description: "Abrir cuando un caso falla o cuando SonarQube / ZAP reporta un hallazgo."
+title: "[BUG-XXX] <resumen corto del defecto>"
+labels: ["tipo: defecto"]
+body:
+  - type: input
+    id: id_bug
+    attributes:
+      label: ID del defecto
+      placeholder: "BUG-001"
+    validations:
+      required: true
+
+  - type: input
+    id: caso
+    attributes:
+      label: Caso de prueba relacionado
+      placeholder: "CP-02 (#5)"
+    validations:
+      required: true
+
+  - type: input
+    id: requisito
+    attributes:
+      label: Requisito ERS / norma afectada
+      placeholder: "RF-1.2 / NFR-SEG-9 / Ley 21.719"
+
+  - type: dropdown
+    id: severidad
+    attributes:
+      label: Severidad
+      description: "Crítica = bloquea el negocio · Mayor = función importante falla sin alternativa · Menor = falla con alternativa · Cosmética = visual/texto"
+      options: ["Crítica", "Mayor", "Menor", "Cosmética"]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: origen
+    attributes:
+      label: Origen del hallazgo
+      options: ["Ejecución manual (navegador)", "Postman", "OWASP ZAP", "JMeter / k6", "SonarQube (análisis estático)", "Lighthouse"]
+    validations:
+      required: true
+
+  - type: textarea
+    id: entorno
+    attributes:
+      label: Entorno
+      description: "Navegador + versión, SO, commit/versión de Atlas. Puedes enlazar el issue de entorno."
+      placeholder: "Chrome 1xx.x / Windows 11 / ver #1"
+    validations:
+      required: true
+
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos para reproducir
+      description: "Instrucciones exactas para que el desarrollador vea el error."
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Resultado esperado
+    validations:
+      required: true
+
+  - type: textarea
+    id: obtenido
+    attributes:
+      label: Resultado obtenido
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidencia
+    attributes:
+      label: Evidencia
+      description: "Captura del error, mensaje del sistema, respuesta HTTP o log. Guarda copia en evidencias/04-defectos/BUG-XXX/"
+    validations:
+      required: true
