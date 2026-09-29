@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: "Dashboard de SonarQube (local)"
+    url: http://localhost:9000/dashboard?id=atlas-crealab
+    about: "Resultados del análisis estático de Atlas (requiere SonarQube levantado en el equipo)."
