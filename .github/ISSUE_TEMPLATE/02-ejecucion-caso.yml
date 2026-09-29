@@ -1,0 +1,107 @@
+name: "Ejecución de caso de prueba"
+description: "Registrar la ejecución de un caso del Plan de Pruebas"
+title: "[CP-XX] <nombre del caso>"
+labels: ["tipo: caso-prueba", "estado: pendiente"]
+body:
+  - type: input
+    id: id_caso
+    attributes:
+      label: ID del caso
+      placeholder: "CP-01"
+    validations:
+      required: true
+
+  - type: input
+    id: requisito
+    attributes:
+      label: Requisito ERS asociado (trazabilidad)
+      placeholder: "RF-1.1"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ciclo
+    attributes:
+      label: Ciclo de ejecución
+      options:
+        - "Ciclo 1 - Smoke Test"
+        - "Ciclo 2 - Ejecución de casos"
+        - "Re-test (verificación de corrección)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad (basada en riesgo)
+      options: ["Alta", "Media", "Baja"]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: navegador
+    attributes:
+      label: Navegador / herramienta usada
+      multiple: true
+      options: ["Chrome", "Firefox", "Edge", "Postman", "OWASP ZAP", "JMeter", "Lighthouse", "Adminer"]
+
+  - type: textarea
+    id: precondiciones
+    attributes:
+      label: Precondiciones
+    validations:
+      required: true
+
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos ejecutados
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: datos
+    attributes:
+      label: Datos de prueba usados
+    validations:
+      required: true
+
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Resultado esperado
+    validations:
+      required: true
+
+  - type: textarea
+    id: obtenido
+    attributes:
+      label: Resultado obtenido
+      description: "Lo que realmente pasó. Incluye código HTTP / respuesta JSON si aplica."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: estado
+    attributes:
+      label: Estado
+      options: ["Aprueba", "Falla", "Bloqueado"]
+    validations:
+      required: true
+
+  - type: input
+    id: defecto
+    attributes:
+      label: Defecto asociado
+      description: "Si falla, crea un issue con la plantilla 'Reporte de defecto' y enlázalo aquí (ej: #12 BUG-001). Si no aplica: N/A"
+      placeholder: "N/A"
+
+  - type: textarea
+    id: evidencia
+    attributes:
+      label: Evidencia (capturas / logs)
+      description: "Arrastra capturas aquí y guarda la copia en evidencias/03-casos/CP-XX/"
